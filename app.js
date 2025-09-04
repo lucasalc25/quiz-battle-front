@@ -37,14 +37,19 @@ async function idToken() {
 
 async function authedFetch(path, opts = {}) {
   const token = await idToken();
-  return fetch(`${API}${path}`, {
-    ...opts,
-    headers: {
-      "Content-Type": "application/json",
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      ...(opts.headers || {}),
-    },
-  });
+  const method = (opts.method || "GET").toUpperCase();
+
+  const headers = { ...(opts.headers || {}) };
+
+  // Só adiciona Content-Type se não for GET/HEAD
+  if (method !== "GET" && method !== "HEAD") {
+    headers["Content-Type"] = "application/json";
+  }
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+
+  return fetch(`${API}${path}`, { ...opts, method, headers });
 }
 
 // === Auth UI ===
