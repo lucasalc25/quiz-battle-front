@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Quiz Battle Online</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth-compat.js"></script>
+  <script defer type="module" src="app.js"></script>
+</head>
+<body>
+  <main class="container">
+    <section id="auth">
+      <h1>Quiz Battle Online</h1>
+      <p class="muted">Faça login para jogar (ou use modo dev desbloqueado).</p>
+
+      <div class="grid">
+        <input id="email" placeholder="email" />
+        <input id="password" placeholder="senha" type="password" />
+        <button id="loginBtn">Entrar / Registrar</button>
+        <button id="logoutBtn" class="secondary">Sair</button>
+      </div>
+
+      <div class="grid mt">
+        <input id="username" placeholder="apelido no ranking (ex: Lucas)" />
+        <button id="startBtn">Começar partida</button>
+      </div>
+      <p id="msg"></p>
+    </section>
+
+    <section id="game" class="hidden">
+      <header class="bar">
+        <div>Jogador: <strong id="playerName">-</strong></div>
+        <div>Pontuação: <strong id="score">0</strong></div>
+        <div>Tempo: <strong id="timer">15</strong>s</div>
+      </header>
+
+      <div id="card" class="card">
+        <h2 id="qtext">Pergunta</h2>
+        <div id="options" class="options"></div>
+      </div>
+
+      <footer class="bar">
+        <div>Questão <span id="current">1</span> / <span id="total">10</span></div>
+        <button id="giveupBtn" class="danger">Encerrar</button>
+      </footer>
+    </section>
+
+    <section id="final" class="hidden">
+      <h2>Fim de jogo 🎉</h2>
+      <p>Sua pontuação: <strong id="finalScore">0</strong></p>
+      <h3>Ranking Top 10</h3>
+      <ol id="ranking"></ol>
+      <div class="grid">
+        <button id="againBtn">Jogar de novo</button>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
